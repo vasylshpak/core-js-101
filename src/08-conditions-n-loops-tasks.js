@@ -27,8 +27,17 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 5 !== 0 && num % 3 !== 0) {
+    return num;
+  }
+  if (num % 5 === 0 && num % 3 === 0) {
+    return 'FizzBuzz';
+  }
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return 'Fizz';
 }
 
 
@@ -43,8 +52,14 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let i = n;
+  let res = 1;
+  while (i > 0) {
+    res *= i;
+    i -= 1;
+  }
+  return res;
 }
 
 
@@ -80,8 +95,13 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a ** 2 + b ** 2 === c ** 2 || a ** 2 + c ** 2 === b ** 2 || c ** 2 + b ** 2 === a ** 2
+    || (a === b && b === c)) {
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -208,8 +228,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -225,8 +245,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +num.toString().split('').reverse().join('');
 }
 
 
@@ -294,8 +314,34 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  let string = str;
+  const brackets = ['[]', '()', '{}', '<>'];
+  let len = str.length;
+
+  function delBrackets(x) {
+    brackets.forEach((item) => {
+      if (x.includes(item)) {
+        string = x.replace(item, '');
+      }
+    });
+  }
+
+  while (len) {
+    delBrackets(string);
+
+    if (string.length < len) {
+      len = string.length;
+    } else {
+      break;
+    }
+  }
+
+  if (string.length) {
+    return false;
+  }
+
+  return true;
 }
 
 
@@ -319,8 +365,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -359,8 +405,28 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+  m1.forEach((el) => {
+    let count = 0;
+    const subRes = [];
+    while (count < m2[0].length) {
+      let n = 0;
+      let countItem = 0;
+
+      while (countItem < el.length) {
+        n += el[countItem] * m2[countItem][count];
+        countItem += 1;
+      }
+
+      subRes.push(n);
+      count += 1;
+    }
+
+    res.push(subRes);
+  });
+
+  return res;
 }
 
 
